@@ -1,0 +1,40 @@
+﻿@model BitSteam.Models.ReportViewData
+
+@{
+    ViewBag.Title = "Categories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="grid_8">
+    <!-- Display a list of categories-->
+    <div class="grid_2 alpha">
+        <fieldset class="rightBlock">
+            <legend>Tags</legend>
+            <ul>
+                @foreach (var tag in Model.allTags)
+                {
+                    <li>@Html.ActionLink(tag.name, "ChooseTag", new { tagId = @tag.id })</li>
+                }
+            </ul>
+        </fieldset>
+    </div>
+    <div class="grid_6 omega">
+        <!-- Determine if a Category has already been chosen-->
+        @if (Model.currentTag != null)
+        {
+            <!-- Display blogs that contain the selected Tag-->
+            <fieldset class="rightBlock">
+                <legend>Blogs with Tag: @Model.currentTag.name</legend>
+                <ul>
+                    @foreach (var blog in Model.chosenBlogs)
+                    {
+                        <li>@Html.ActionLink(blog.title, "ChooseBlog", new { blogId = @blog.id })</li>
+                    }
+                </ul>
+            </fieldset>
+
+
+        }
+    </div>
+</div>
+

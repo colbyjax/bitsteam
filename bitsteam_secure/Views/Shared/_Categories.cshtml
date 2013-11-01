@@ -1,0 +1,11 @@
+﻿@model Blogger.Models.BlogViewData
+<fieldset class="rightBlock">
+    <legend>@Html.ActionLink("Categories", "Index","Report")</legend>
+    <ul>
+        @foreach (var tag in Model.allTags)
+        {
+            <li class="link">@Html.ActionLink(tag.name, "ChooseTag", new { tag_id = @tag.id })</li>
+            
+        }
+    </ul>
+</fieldset>

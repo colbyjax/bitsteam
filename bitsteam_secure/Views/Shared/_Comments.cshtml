@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Blogger.Models.Comment>
+
+<div id="comments">
+
+    @foreach (var comment in Model)
+    {
+        <div class="comment">
+            <ul>
+                <li>@Html.Encode(comment.author)</li>
+                <li>@Html.Encode(comment.date)</li>
+                @if(Request.IsAuthenticated && comment.author.Equals(User.Identity.Name)) {
+                    <li><a href="#" class="edit" onclick="editComment(@Html.Encode(comment.id))">Edit</a></li>
+                    <li><a href="#" class="delete" onclick="deleteComment(@Html.Encode(comment.id))">Delete</a></li>
+                }
+                <li class="content">@Html.Encode(comment.content)</li>
+            </ul>
+        </div>
+    }
+
+</div>

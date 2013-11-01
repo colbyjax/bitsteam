@@ -1,0 +1,128 @@
+﻿.blog {
+    margin: 0em .2em 1.4em .2em;
+    /*border: 1px solid black;*/
+}
+.blogTitle {
+    margin: 0 0 .5em .2em;
+    border: 1px solid #EFEBEF;
+}
+
+.blogTitle ul{
+    list-style:none;
+}
+
+.blogTitle ul li {
+    float:left;
+    margin: .3em 2em 0 1em;
+    font-size: .8em;
+    color: #858687;
+    font-family: 'Oswald', sans-serif;
+    font-weight:  500;
+
+}
+
+.blogContent {
+    /*font-family: Verdana, Geneva, sans-serif;*/
+    font-family: 'Segoe UI',Tahoma,Arial,Helvetica,sans-serif;
+    color: #494949;
+    font-size: .9em;
+}
+
+.blogContent h1 {
+    margin: .5em;
+    font-size: 2em;
+    font-family: 'Lato', sans-serif;  
+    color: #0075CE;
+}
+
+.blogContent h2 {
+    margin: .5em 0 0 1em;
+    color: #0075CE;
+    font-size: 1.1em;
+    font-family: 'Lato', sans-serif;  
+}
+
+.blogContent p {
+    margin: .5em .5em 0 1em;
+}
+
+.blogContent ul {
+    list-style: square;
+    margin: 1em;
+}
+
+.blogContent ul li.sub {
+    font-family: "Courier New", Courier, monospace;
+    color: #2D71D6;
+    margin: 0 0 0 2em;
+    font-size: .9em;
+
+}
+
+.blogContent ul li.head {
+    font-family: 'Segoe UI',Tahoma,Arial,Helvetica,sans-serif;
+    color: black;
+    margin: 0 0 0 0;
+    font-size: 1.1em;
+}
+
+.blogContent p a:link,
+.blogContent p a:visited,
+.blogContent p a:active {
+        color: #858687;
+        text-decoration: underline;
+}
+
+.comment {
+    padding: .5em;
+    margin: .5em .2em 0 1em;
+    /*background: #EFEBEF;*/
+    background: #F2F2F2;
+    overflow: hidden;
+    border: 1px dotted #858687;
+}
+
+.commentHeader {
+    font-family: ‘Arial Black’, Gadget, sans-serif;
+    font-weight: bold;
+    color: #0075CE;
+  
+
+}
+
+a.commentHeader {
+    color: #0075CE;
+    font-size: 1em;
+    font-family: "Segoe UI",Verdana,Helvetica,Sans-Serif;
+   
+}
+
+.comment ul li {
+    float:left;
+    padding: 0 1em 0 0;
+    font-family: 'Oswald', sans-serif;
+    font-size: .9em;
+    color: #E35C14;
+    
+}
+
+.comment ul li a:link,
+.comment ul li a:visited,
+.comment ul li a:active{
+    color: #0075CE;
+    font-size: .9em;
+    font-family: "Segoe UI",Verdana,Helvetica,Sans-Serif;
+    text-decoration: underline;
+}
+
+.comment ul li.content {
+    clear: both;
+    color: #494949;
+    font-family: 'Segoe UI',Tahoma,Arial,Helvetica,sans-serif;
+    font-size: .9em;
+}
+
+.commentHeader ul li {
+    float:left;
+    margin: .5em;
+}

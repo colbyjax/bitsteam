@@ -1,0 +1,9 @@
+﻿@model Blogger.Models.BlogViewData
+<fieldset class="rightBlock">
+    <legend>Recent Posts</legend>
+    <ul>
+        @foreach(var blog in Model.allBlogs) {
+            <li class="link">@Html.ActionLink(blog.title,"ChooseBlog", new { blog_id = @blog.id })</li>
+        }
+    </ul>
+</fieldset>

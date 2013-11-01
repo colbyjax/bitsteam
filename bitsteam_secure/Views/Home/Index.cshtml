@@ -1,0 +1,146 @@
+﻿@model Blogger.Models.BlogViewData
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/blog.css" rel="stylesheet" />
+@section leftBar{
+    <div id="leftBar" class="grid_2 alpha">
+        @{Html.RenderPartial("_FeaturedPosts");}
+    </div>
+}
+<div id="main" class="grid_8">
+    @* Return the most Recent Blog *@
+    <div class="blog">
+        <div class="blogTitle">
+            <ul>
+                <li class="date">@Model.currentBlog.date</li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+        <div class="blogContent">
+           @* @Model.currentBlog.content*@
+            
+           @{Html.RenderPartial("~/Views/Blogs/" + Model.currentBlog.content);}
+        </div>
+        <div class="commentHeader">
+            <ul>
+                <li id="comment_count">@Model.currentBlog.comments.Count Comment(s) >></li>
+                <li>
+                @if(Request.IsAuthenticated) {
+                    <a id="add_comment" class="commentHeader" href="#">Add Comment</a>
+                } else {
+                    <a id="login" class="commentHeader" style="text-decoration:underline;" href="@Url.Content("~/Account/Login")">Login to Add Comments</a>
+                }
+                </li>
+                   
+            </ul>
+        </div>
+        <div class="clear"></div>
+        <div id="add_comment_div" class="comment hidden">
+            <form id="add_comment_form" method ="get" action="@Url.Action("AddComment", "Home")">
+                <ul>
+                    <li>@Html.TextArea("new_comment","",10,70, new {@id="new_comment"})</li>
+                    <li><a id="submit_comment" href="#">Submit </a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a id="cancel_comment" href="#">Cancel</a>
+                    </li>
+                    <li><input type="text" class="hidden" id="blog_id" name="blog_id" value="@Model.currentBlog.id" /></li>
+                </ul>
+            </form>
+        </div>
+        
+        <!-- Comments -->
+        @{Html.RenderPartial("_Comments", Model.currentBlog.comments);}
+    </div>
+</div>
+@section rightBar {
+     <div id="rightBar" class="grid_2 omega">
+        <div class="searchBar">
+            Search
+        </div>
+        <div class="box">
+            @{Html.RenderPartial("_RecentPosts");}
+        </div>
+        <div class="box">
+            @{Html.RenderPartial("_Categories");}
+        </div>
+        <div class="box">
+            @{Html.RenderPartial("_Archives");}
+        </div>
+        <div class="box">
+            <fieldset class="rightBlock">
+                <legend>Meta</legend>
+                <ul>
+                    <li class="link"><a href="#">Site Admin</a></li>
+                    <li class="link"><a href="#">Log out</a></li>
+                    <li class="link"><a href="#">Entries RSS</a></li>
+                    <li class="link"><a href="#">Comments RSS</a></li>
+                </ul>
+            </fieldset>
+        </div>
+    </div>
+}
+
+@section JavaScript {
+<script type="text/javascript">
+    // Register Functions
+    $(document).ready(function(){
+
+        $("#add_comment").click(function () {
+            addComment();
+            return false;
+        });
+
+        $("#submit_comment").click(function () {
+            submitComment();
+            return false;
+        });
+
+        $("#cancel_comment").click(function () {
+            clearComment();
+            return false;
+        });
+
+    });
+
+    // Function Definitions
+    function addComment() {
+        // Make Add Comment Div visible
+        $("#add_comment_div").removeClass("hidden");
+        $("#add_comment_div").effect('slide', 500);
+        
+    }
+
+    function clearComment() {
+        $("#new_comment").val("");
+        $("#add_comment_div").effect('fold', 500);
+    }
+
+    function submitComment() {
+        var form = $("#add_comment_form");
+        $("#comments").load("@Url.Action("AddComment","Home")", form.serialize());
+        clearComment();
+    }
+
+    function deleteComment(comment_id) {
+        var blog_id = $("#blog_id").val();
+        //alert("BlogID: " + blog_id + " CommentID: " + comment_id);
+        $("#comments").load("@Url.Action("DeleteComment","Home")", {
+            blog_id: blog_id,
+            comment_id: comment_id
+        });
+        return false;
+    }
+
+    function editComment(comment_id) {
+        var blog_id = $("#blog_id").val();
+        alert("TODO: Editing Comment");
+        return false;
+    }
+
+</script>   
+}
+

@@ -1,0 +1,64 @@
+﻿
+div#adminBar {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 2.2em;
+    color: #CECFCE;
+    background: red;
+}
+
+div#adminBar ul li{
+    float:left;
+    margin: .3em 2em 0 2em;
+    color: white;
+}
+
+div#adminBar ul li a:link,
+div#adminBar ul li a:visited, 
+div#adminBar ul li a:active {
+    color: white;
+        
+}
+
+div#adminBar ul li a:hover {
+   color: #CECFCE;
+}
+
+
+div.block {
+    margin: 1em 0 0 0;
+    border-top: 1px solid #EFEBEF;
+}
+
+.buttons {
+    
+    padding:.5em;
+
+}
+
+fieldset ul, fieldset li{
+border:0; margin:0; padding:0; list-style:none;
+}
+
+.input-label {
+    float: left;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1em;
+    color: #E35C14; 
+    width: 8em;
+    margin-right: 1em;
+}
+
+.input-field {
+    float: left;
+    font-size: 1.1em;
+    width: 14em;
+}
+
+.input-message {
+    float: left;
+    font-size: 1.1em;
+    width:18em;
+    color: red;
+}

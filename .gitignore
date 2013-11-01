@@ -1,0 +1,27 @@
+# ignore following files
+*/packages/*
+/packages/*
+/staging/*
+*/staging/*
+*/APP_DATA/*
+/blog_stage/*
+obj/
+bin/
+TestResults/
+_ReSharper.*
+*.csproj.user
+Web.*
+Web.*.*
+*.resharper.user
+*.resharper
+*.suo
+*.cache
+*~
+*.swp
+*.resharper.user
+*.rptproj.user
+*.db
+*.sdf
+*.tmp
+*.mdf
+*.ldf

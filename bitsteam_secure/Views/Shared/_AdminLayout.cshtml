@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>BitSteam.org</title>
+
+    <script src="~/Scripts/jquery-2.0.3.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Mr+De+Haviland' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,100italic' rel='stylesheet' type='text/css'>
+    <link href="~/Content/main.css" rel="stylesheet" />
+    <link href="~/Content/960_12_col.css" rel="stylesheet" />
+    <link href="~/Content/reset.css" rel="stylesheet" />
+    <link href="~/Content/admin.css" rel="stylesheet" />
+
+    @RenderSection("JavaScript", required: false)
+</head>
+<body>
+    <div id="loginBar" class="grid_12 horizontal_menu">
+        <ul>
+            <li><a href="@Href("~/Home/FAQ")">FAQ</a></li>
+            <li><a href="@Href("~/Home/About")">About</a></li>
+            <li><a href="@Href("~/Home")">Home</a></li>
+        </ul>
+    </div>
+    <div id="adminBar" class="grid_12 horizontal_menu">
+        <ul>
+            <li><a href="#">Add New Blog</a></li>
+            <li><a href="#">Edit Blog</a></li>
+        </ul>
+    </div>
+    <div id="container" class="container_12">
+
+        <div class="clear"></div>
+        <div id="titleBar" class="grid_10 alpha">
+            <span>Admin</span>
+        </div>
+        <div class="grid_2 omega">
+             @if(Request.IsAuthenticated) {
+                <a href="@Href("~/Account/LogOff")">Logoff</a>
+             } else {
+                 @Html.Display("")
+                <a href="@Href("~/Account/Login")">Login</a>
+             }
+        </div>
+        <div class="clear"></div>
+        <div id="sandBox" class="grid_12">
+            @RenderSection("leftBar", required: false)
+
+            @RenderBody()
+
+            @RenderSection("rightBar", required: false)
+           
+        </div>
+    </div>
+</body>
+</html>

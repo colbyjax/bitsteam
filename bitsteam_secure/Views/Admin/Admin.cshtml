@@ -1,0 +1,106 @@
+﻿@model Blogger.Models.BlogViewData
+
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div id="main" class="grid_8">
+    <h1>Add New Blog</h1>
+    <div class="grid_4 alpha">
+            @Html.ActionLink("Add User Role", "AddUserRole");
+
+            @using (Html.BeginForm("Save","Admin")) {
+                
+                <fieldset>
+                    <legend></legend>
+                    <ul>
+                        <li class="input-label">@Html.Label("Title ")</li>
+                        <li class="input-field"> @Html.TextBox("blog_title")</li>
+                        <li class="clear" />
+                        <li class="input-label">@Html.Label("FileName ")</li>
+                        <li class="input-field">@Html.TextBox("blog_content")</li>
+                        <li class="clear" />
+                        <li><label>&nbsp</label></li>
+                        
+                    </ul>
+                </fieldset>
+                <fieldset>
+                    <legend>Tags</legend>
+                    <ul>
+                        <li class="input-label">
+                           @Html.ListBoxFor(x => Model.SelectedTags, new MultiSelectList(Model.allTags,"id","name"))
+                        </li>
+                        <li class="clear" />
+                        <li><a id="add_tag" href="#">Add Tag</a></li>
+                        <li><label>&nbsp</label></li>
+                        <li><input class="buttons" id="submit_new_blog" type="submit" value="Add Blog" /></li>
+                    </ul>
+                </fieldset>
+            }
+    </div>
+    <div class="grid_4 omega">
+        <div id="add_tag_div" class="hidden">
+            <h2>Enter Tag Name</h2>
+            <form id="add_tag_form" method="get" action="@Url.Action("AddTag", "Admin")">
+                <ul>
+                    <li>@Html.TextBox("new_tag")</li>
+                    <li>
+                        <a id="submit_tag" href="#">Add</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a id="cancel_tag" href="#">Cancel</a>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+   
+    <div class="block hidden">
+             <h1>Edit Existing Blog</h1>
+            <input id="delete_blog" type="button" value="Delete" />
+            <input id="edit_blog" type="button" value="Edit" />
+    </div>
+</div>
+
+@section JavaScript {
+    <script type="text/javascript">
+    // Register Functions
+    $(document).ready(function(){
+
+        $("#add_tag").click(function () {
+            addTag();
+            return false;
+        });
+
+        $("#cancel_tag").click(function () {
+            cancelTag();
+            return false;
+        });
+        
+        $("#submit_tag").click(function () {
+            submitTag();
+            return false;
+        });
+
+    });
+
+    // Function Definitions
+    function addTag() {
+        // Make Add Comment Div visible
+        $("#add_tag_div").removeClass("hidden");
+        $("#add_tag_div").effect('slide', 500);
+
+    }
+
+    function cancelTag() {
+       // $("#new_comment").val("");
+        $("#add_tag_div").effect('fold', 500);
+    }
+
+    function submitTag() {
+        var form = $("#add_tag_form");
+        $("#add_tag_form").submit();
+        cancelTag();
+    }
+    </script>
+}

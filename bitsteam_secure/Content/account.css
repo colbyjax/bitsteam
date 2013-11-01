@@ -1,0 +1,56 @@
+﻿#logon-container {
+    padding: .5em;
+    margin:.5em;
+    width: 26em;
+    border: 1px dotted #858687;
+}
+
+#register-container {
+    padding: .5em;
+    margin:.5em;
+    width: 50em;
+    border: 1px dotted #858687;
+}
+
+fieldset legend {
+    color: #858687; 
+}
+
+fieldset {
+    margin: 0;
+    padding: 0;
+}
+
+ol {
+    list-style:none;
+
+}
+.input-label {
+    float: left;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1em;
+    color: #E35C14; 
+    width: 8em;
+    margin-right: 1em;
+}
+
+.input-field {
+    float: left;
+    font-size: 1.1em;
+    width: 14em;
+}
+
+.input-message {
+    float: left;
+    font-size: 1.1em;
+    width:18em;
+    color: red;
+}
+
+.clear {
+    clear: both;
+}
+
+li {
+
+}

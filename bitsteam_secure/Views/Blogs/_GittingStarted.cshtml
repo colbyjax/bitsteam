@@ -1,0 +1,177 @@
+
+
+<div class="blogContent">
+    <h1>Gitting Started with Git</h1>
+    <p>
+        Oh man, I love puns, Git it....hahah....and thats enough of that, so lets git started....can't help myself!</p>
+    <p>
+        If you haven't already heard of Git, it is an amazing Source Control system.  I have used several, including
+        Visual SourceSafe, Rational Clearcase, and Team Foundation Server.  None of them stack up to Git.  
+        Git is a distributed Source Control system that has its roots in Linux, but has spread to many operating
+        systems. It doesn't use the typical Master Server (HOST), with local copies syncing to that server.  You can think of it
+        as peer-to-peer. </p>
+    <p> That doesn't mean there is no centralized storage.  Several sites offer off-site storage such as 
+        <a href="http://www.github.com">GitHub</a> and <a href="http://www.codeplex.com">CodePlex</a>.
+        I primarily use Git on Windows, but I prefer the command line, so the following instructions
+        should work on all OS's.
+    </p>
+    <h2>Cool, how do I get started?</h2>
+    <p>
+        First, you need to download a copy of GitHub for Windows, this will install the GUI client and a link to Powershell with
+        Git.  You will most likely want to create an account on GitHub so you can sync your files to an off-site remote host.
+        You can you use the GUI if you like, but I find using the command line will give you a much better understanding
+        of the system when learning it.  After you get used to the command line, you will probably stick with it.
+    </p>
+    <p>
+        Go ahead and launch the Powershell (Shortcut is 'Git Shell') to get started.
+    </p>
+    <p>Git works on a few basic concepts.  You will need to create a <i>repository</i> to identify your directory as source
+    controlled.  Once you have created a repository you will need to <i>stage</i> files you would like tracked.  Then, when 
+    you are happy with the changes, you perform a commit.  This will record those files in a new <i>snapshot</i></p>
+    <h2>Give it a try</h2>
+    <p>Change to a directory where you have the code you want put in source control and create a repository</p>
+    <pre class="brush: ps; " >
+        >cd /dev/projects/myproject
+        >git init
+        #Initialized empty git repository
+        
+        #Create an empty file
+        >touch hello.txt
+
+        #Add some text
+        >echo "hello" > hello.txt
+        >type hello.txt
+        hello
+    </pre>
+    <p>Once you have created your repository, you <i>stage</i> the files.  This basically <i>tracks</i> the files, but does
+    not make them part of the <i>snapshot</i>.</p>
+    <pre class="brush:ps; highlight:[1,12,15,27,33]">
+        #Determine what files have changed
+        >git status
+        # On branch master
+        #
+        # Initial commit
+        #
+        # Untracked files:
+        #   (use "git add file..." to include in what will be committed)
+        #
+        #       hello.txt
+        
+        # Add all changed and un-tracked files to stage (Stage the files)
+        >git add .
+        
+        # Take a look at what has changed, run status again
+        >git status
+        # On branch master
+        #
+        # Initial commit
+        #
+        # Changes to be committed:
+        #   (use "git rm --cached file..." to unstage)
+        #
+        #       new file:   hello.txt
+        #
+        
+        # Happy with the changes, commit the files with a message to note what the commit is
+        >git commit -m "This is my first commit"
+        [master (root-commit) e3e4d40] This is my first commit
+        1 file changed, 0 insertions(+), 0 deletions(-)
+        create mode 100644 hello.txt
+
+        # Lets take a look at what we created
+        >git log
+        commit e3e4d405ea0db7641de015ed31d5cfc2b61
+        Author: colbyjax 
+        Date:   Tue Oct 29 11:11:12 2013 -0400
+        This is my first commit
+    </pre>
+    <h2>Great....so how does this help me?</h2>
+    <p>By committing files, you have created a snapshot in time of your code.  You can always rollback to that snapshot.  For example,
+    let's say you want to add the word <i>hello</i> to the hello.txt file you committed above, but you made a typo (or really botched it up).
+    You can simply <i>checkout</i> your committed version of the file to restore it.</p>
+    <pre class="brush:ps; highlight:[1,6]">   
+    #Add some garbage text
+    >echo "xyz" > "hello.txt"
+    >type hello.txt
+    xyz
+    
+    #Ooops, didn't mean to that, load the pre-modified version of hello.txt
+    >git checkout hello.txt
+    >type hello.txt
+    hello
+    </pre>
+    <p>This is obviously a simplistic example, but can be very helpful when dealing with complex code.</p>
+    <h2>How do I Un-Stage a file?</h2>
+    <p>Simply perform a reset which will remove the file from the stage but will not undo the modifications (like checkout does)</p>
+    <pre class="brush:ps; highlight:[1,4,7]">  
+    #Create a new file
+    >touch world.txt
+    
+    #Stage the file
+    git add world.txt
+    
+    #Remove the file from the stage
+    git reset world.txt
+    </pre>
+    <h2>How do I Un-commit?</h2>
+    <p>Git has two different methods of accomplishing this: <i>soft</i> and <i>hard</i>.  A <i>soft reset</i> will keep your modifications
+    but rollback the last commit. A <i>hard reset</i> will throw everything away that took place after your last commit.</p>
+    <pre class="brush:ps; highlight:[1,8,11,12]">
+    #Change hello.txt from hello to new text, add a new file, stage, then commit
+    >echo "Hello World, second commit" > hello.txt
+    >echo "world" > world.txt
+    >git add .
+    >git commit -m "Roll me back"
+    >type hello.txt
+    Hello World, second commit
+    #Make some more changes
+    >echo "another change in world" > world.txt
+        
+    #Man, I really screwed this up....can i just start with my last stable commit
+    #Yes, you can, do hard reset and throw everything away that was done after the previous commit
+    >git reset --hard HEAD^
+    >dir
+        
+    Mode                LastWriteTime     Length Name
+    ----                -------------     ------ ----
+    -a---        10/29/2013   1:57 PM         16 hello.txt
+    >type hello.txt
+    hello   
+    </pre>
+    <h2>Lets Review</h2>
+    <p>
+        This will get you started with the incredible powerful and suprisingly simple (once you get used to it) tool git.  Here is a summary
+        of the commands and what they do:
+    </p>
+    <ul>
+        <li class="head">Adds a reposity</li>
+        <li class="sub">git init</li>
+        <li class="head">Stages a file, The '.' will stage all modified files</li>
+        <li class="sub">git add <i>filename</i></li>
+        <li class="head">Commits all staged files with a message</li>
+        <li class="sub">git commit -m "<i>message</i>" </li>
+        <li class="head">Rolls back a modified file to its last committed version</li>
+        <li class="sub">git checkout <i>filename</i> </li>
+        <li class="head">Unstages a file</li>
+        <li class="sub">git reset <i>filename</i></li>
+        <li class="head">Retrieves current status, shows modifed/staged/untracked files</li>
+        <li class="sub">git status</li>
+        <li class="head">Shows all commits with their messages</li>
+        <li class="sub">git log</li>
+        <li class="head">Rolls back to the prior commit, but preserves file changes as modified files</li>
+        <li class="sub">git reset --soft HEAD^ </li>
+        <li class="head"> Rolls back to the prior commit, trashing any changes *BE CAREFUL</li>
+        <li class="sub">git reset --hard HEAD^</li>
+    </ul>
+    <p>
+        Once you have a solid foundation, you can learn about branching and remote repositories. 
+    </p>
+    <h2>Additional Resources</h2>
+    <ul>
+        <li class="link"><a href="http://www.vogella.com/articles/Git/article.html">Excellent Tutorial by Lars Vogel</a></li>
+        <li class="link"><a href="http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging">Git Branching and Merging</a></li>
+    </ul>
+
+</div>
+
+
